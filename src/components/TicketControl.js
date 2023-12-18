@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react"; 	           // add useState
 import NewTicketForm from "./NewTicketForm";
 import TicketList from "./TicketList";
 import TicketDetail from "./TicketDetail";
 import EditTicketForm from "./EditTicketForm";
+
 // import { connect } from "react-redux";           removed in refactor to using hooks
 // import PropTypes from "prop-types";
 // import * as a from './../actions';
@@ -17,17 +18,22 @@ function TicketControl() {
   //     editing: false
   //   };
 	// }
+
+	const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
 	
   const handleClick = () => {
-    if (this.state.selectedTicket != null) {
-      this.setState({
-        selectedTicket: null,
-        editing: false
+		if (this.state.selectedTicket != null) {
+			setFormVisibleOnPage(false);
+			this.setState({
+				formVisibleOnPage: false,
+				selectedTicket: null,
+        // editing: false
       });
-    } else {
-      const { dispatch } = this.props;
-      const action = a.toggleForm();
-      dispatch(action);
+		} else {
+			setFormVisibleOnPage(!formVisibleOnPage);
+      // const { dispatch } = this.props;
+      // const action = a.toggleForm();
+      // dispatch(action);
     }
 	}
 	
@@ -53,11 +59,14 @@ function TicketControl() {
 	}
 	
   const handleAddingNewTicketToList = (newTicket) => {
-    const { dispatch } = this.props;
-    const action = a.addTicket(newTicket);
-    dispatch(action);
-    const action2 = a.toggleForm();
-    dispatch(action2);
+    // const { dispatch } = this.props;
+    // const action = a.addTicket(newTicket);
+    // dispatch(action);
+    // const action2 = a.toggleForm();
+		// dispatch(action2);
+		const newMainTicketList = this.state.mainTicketList.concat(newTicket);
+    this.setState({mainTicketList: newMainTicketList});
+    setFormVisibleOnPage(false)
 	} 
 	
   const handleChangingSelectedTicket = (id) => {
@@ -75,8 +84,8 @@ function TicketControl() {
       currentlyVisibleState = <EditTicketForm ticket = {this.state.selectedTicket} onEditTicket = {this.handleEditingTicketInList} />
       buttonText= "Return to Ticket List";
     } else if (this.state.selectedTicket != null) {
-      currentlyVisibleState = <TicketDetail ticket={this.state.selectedTicket} onClickingDelete = {this.handleDeletingTicket} onClickingEdit = {this.handleEditClick} />
-      buttonText = "Return to Ticket List";
+      // currentlyVisibleState = <TicketDetail ticket={this.state.selectedTicket} onClickingDelete = {this.handleDeletingTicket} onClickingEdit = {this.handleEditClick} />
+      // buttonText = "Return to Ticket List";
     } else if (this.state.formVisibleOnPage) {
       // else if (this.props.formVisibleOnPage) {  
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />; //passing handle() down to NewtickForm as prop called onNewTicketCreation
