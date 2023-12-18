@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TicketDetail(props) {
-  const { ticket, onClickingDelete } = props; //obj destructure so no need props.ticket.location
+  const { ticket, onClickingDelete } = props;
 
   return (
     <React.Fragment>
