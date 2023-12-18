@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { v4 } from 'uuid';
+// import { v4 } from 'uuid';
 import ReusableForm from './ReusableForm';
 
 function NewTicketForm(props) {
@@ -10,7 +10,7 @@ function NewTicketForm(props) {
       names: e.target.names.value,
       location: e.target.location.value,
       issue: e.target.issue.value,
-      id: v4()
+      // id: v4()
     });
   }
   return (
