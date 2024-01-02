@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"; 	  
+import React, { useEffect, useState } from "react";
 import NewTicketForm from "./NewTicketForm";
 import TicketList from "./TicketList";
 import EditTicketForm from "./EditTicketForm";
@@ -38,7 +38,7 @@ function TicketControl() {
 
 		return () => unSubscribe();
 	}, []);
-	
+
 	const handleClick = () => {
 		if (selectedTicket != null) {
 			setFormVisibleOnPage(false);
@@ -48,22 +48,22 @@ function TicketControl() {
 			setFormVisibleOnPage(!formVisibleOnPage);
 		}
 	}
-	
+
 	// const handleDeletingTicket = (id) => {
 	// 	const newMainTicketList = mainTicketList.filter(ticket => ticket.id !== id);
 	// 	setMainTicketList(newMainTicketList);
 	// 	setSelectedTicket(null);
 	// }
-	
+
 	const handleDeletingTicket = async (id) => {
 		await deleteDoc(doc(db, "tickets", id));
 		setSelectedTicket(null);
 	}
-	
+
 	const handleEditClick = () => {
 		setEditing(true);
 	}
-	
+
 	// const handleEditingTicketInList = (ticketToEdit) => {
 	// 	const editedMainTicketList = mainTicketList
 	// 		.filter(ticket => ticket.id !== selectedTicket.id)
@@ -79,7 +79,7 @@ function TicketControl() {
 		setEditing(false);
 		setSelectedTicket(null);
 	}
-	
+
 	// const handleAddingNewTicketToList = (newTicket) => {
 	// 	const newMainTicketList = mainTicketList.concat(newTicket);
 	// 	setMainTicketList(newMainTicketList);
@@ -90,7 +90,7 @@ function TicketControl() {
 		await addDoc(collectionRef, newTicketData);
 		setFormVisibleOnPage(false);
 	}
-	
+
 	const handleChangingSelectedTicket = (id) => {
 		const selection = mainTicketList.filter(ticket => ticket.id === id)[0];
 		setSelectedTicket(selection);
@@ -103,7 +103,7 @@ function TicketControl() {
 			</React.Fragment>
 		)
 	} else if (auth.currentUser != null) {			// to here added to handle authorization
-		
+
 		let currentlyVisibleState = null;
 		let buttonText = null;
 
